@@ -1,7 +1,7 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-//setting up values for different character codes
+//setting up values for different character codes from ascii positions
 const uppercase_codes = asciiArray(65,90);
 const lowercase_codes = asciiArray(97,122);
 const numeric_codes = asciiArray(48,57);
@@ -29,36 +29,33 @@ function generatePassword() {
     numeric: prompt("Would you like to use Numeric Values?","yes"),
     special: prompt("Would you like to use Special Characters?","yes")
   };
-  //Checking to ensure the number entered is within allowable range.
-  // var passlength = [];
-  //   for (var i = 8; i <=128; i++) {
-  //     passlength.push(i);
-  //   }
-
-  //   if (passlength.indexOf(passopts.length) >= 0) {
-  //       console.log("Length was selected appropriately");
-  //   } else {
-  //       alert("please choose a number between 8 and 128");
-  //       console.log("Please choose a number between 8 and 128");
-  //    }
-    // passopts.length,
-    // passopts.lowercase,
-    // passopts.uppercase,
-    // passopts.numeric,
-    // passopts.special
-       
-    let charCodes = lowercase_codes;
-    if (passopts.lowercase) charCodes = charCodes.concat(lowercase_codes);
-    if (passopts.uppercase) charCodes = charCodes.concat(uppercase_codes);
-    if (passopts.numeric) charCodes = charCodes.concat(numeric_codes);
-    if (passopts.special) charCodes = charCodes.concat(special_codes);
-    const passChars = [];
-    for (let i = 0; i < passopts.length; i++) {
-      const characterCode =
-      charCodes[Math.floor(Math.random() * charCodes.length)];
-      passChars.push(String.fromCharCode(characterCode));
+  // Checking to ensure the number entered is within allowable range.
+  var passlength = [];
+    for (var i = 8; i <=128; i++) {
+      passlength.push(i);
     }
-    return passChars.join("");
+
+    if (passlength.indexOf(passopts.length) >= 0) {
+      console.log("Length was selected appropriately");
+      let charCodes = lowercase_codes;
+      if (passopts.lowercase) charCodes = charCodes.concat(lowercase_codes);
+      if (passopts.uppercase) charCodes = charCodes.concat(uppercase_codes);
+      if (passopts.numeric) charCodes = charCodes.concat(numeric_codes);
+      if (passopts.special) charCodes = charCodes.concat(special_codes);
+      const passChars = [];
+        for (let i = 0; i < passopts.length; i++) {
+          const characterCode =
+            charCodes[Math.floor(Math.random() * charCodes.length)];
+          passChars.push(String.fromCharCode(characterCode));
+        }
+      return passChars.join("");
+    } else {
+        alert("please choose a number between 8 and 128");
+        console.log("Please choose a number between 8 and 128");
+     }
+  
+       
+   
 };
 
 // Write password to the #password input
