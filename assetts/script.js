@@ -22,28 +22,27 @@ function asciiArray(low,high) {
 //generate the password with info from prompts
 
 function generatePassword() {
-  var passopts = { 
-    length: Number(prompt("How many characters should your password be? Choose between 8 and 128", "14")),
-    lowercase: prompt("Would you like to use lowercase Letters?","yes"),
-    uppercase: prompt("Would you like to use Capital Letters?","yes"),
-    numeric: prompt("Would you like to use Numeric Values?","yes"),
-    special: prompt("Would you like to use Special Characters?","yes")
-  };
+  var pwdLength = Number(prompt("How long should your password be? Choose between 8 and 128", "14"));
+  var lowercase = confirm("Would you like to use lowercase Letters?");
+  var uppercase = confirm("Would you like to use Capital Letters?");
+  var numeric = confirm("Would you like to use Numeric Values?");
+  var special = confirm("Would you like to use Special Characters?");
+  
   // Checking to ensure the number entered is within allowable range.
   var passlength = [];
     for (var i = 8; i <=128; i++) {
       passlength.push(i);
     }
 
-    if (passlength.indexOf(passopts.length) >= 0) {
+    if (passlength.indexOf(pwdLength) >= 0) {
       console.log("Length was selected appropriately");
       let charCodes = lowercase_codes;
-      if (passopts.lowercase) charCodes = charCodes.concat(lowercase_codes);
-      if (passopts.uppercase) charCodes = charCodes.concat(uppercase_codes);
-      if (passopts.numeric) charCodes = charCodes.concat(numeric_codes);
-      if (passopts.special) charCodes = charCodes.concat(special_codes);
+      if (lowercase) charCodes = charCodes.concat(lowercase_codes)
+      if (uppercase) charCodes = charCodes.concat(uppercase_codes);
+      if (numeric) charCodes = charCodes.concat(numeric_codes);
+      if (special) charCodes = charCodes.concat(special_codes);
       const passChars = [];
-        for (let i = 0; i < passopts.length; i++) {
+        for (let i = 0; i < pwdLength; i++) {
           const characterCode =
             charCodes[Math.floor(Math.random() * charCodes.length)];
           passChars.push(String.fromCharCode(characterCode));
@@ -53,10 +52,8 @@ function generatePassword() {
         alert("please choose a number between 8 and 128");
         console.log("Please choose a number between 8 and 128");
      }
-  
-       
-   
-};
+    
+}
 
 // Write password to the #password input
 function writePassword() {
