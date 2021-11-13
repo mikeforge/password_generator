@@ -16,8 +16,11 @@ function asciiArray(low,high) {
   for (let i = low; i <=high; i++) {
     array.push(i);
   }
+  //console.log(array)
   return array;
+  
 }
+
 
 //generate the password with info from prompts
 
@@ -30,30 +33,39 @@ function generatePassword() {
   
   // Checking to ensure the number entered is within allowable range.
   var passlength = [];
-    for (var i = 8; i <=128; i++) {
-      passlength.push(i);
-    }
+  for (var i = 8; i <=128; i++) {
+    passlength.push(i);
+  }
+  // Checking to ensure at least one type is selected
+  if ((!lowercase) && (!uppercase) && (!numeric) && (!special)) {
+    return alert("At least one type must be selected");
+    }else {
 
-    if (passlength.indexOf(pwdLength) >= 0) {
-      console.log("Length was selected appropriately");
-      let charCodes = lowercase_codes;
-      if (lowercase) charCodes = charCodes.concat(lowercase_codes)
-      if (uppercase) charCodes = charCodes.concat(uppercase_codes);
-      if (numeric) charCodes = charCodes.concat(numeric_codes);
-      if (special) charCodes = charCodes.concat(special_codes);
-      const passChars = [];
+  if (passlength.indexOf(pwdLength) >= 0) {
+    console.log("Length was selected appropriately");
+    let charCodes = [];
+    if (lowercase) charCodes = charCodes.concat(lowercase_codes);
+    if (uppercase) charCodes = charCodes.concat(uppercase_codes);
+    if (numeric) charCodes = charCodes.concat(numeric_codes);
+    if (special) charCodes = charCodes.concat(special_codes);
+      
+        const passChars = [];
         for (let i = 0; i < pwdLength; i++) {
           const characterCode =
             charCodes[Math.floor(Math.random() * charCodes.length)];
           passChars.push(String.fromCharCode(characterCode));
         }
-      return passChars.join("");
-    } else {
-        alert("please choose a number between 8 and 128");
-        console.log("Please choose a number between 8 and 128");
-     }
-    
+
+       return passChars.join("");
+  } 
+  else {
+      alert("please choose a number between 8 and 128");
+      console.log("Please choose a number between 8 and 128");
+    }
+  }
 }
+
+// console.log(generatePassword());
 
 // Write password to the #password input
 function writePassword() {
